@@ -133,16 +133,19 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const recipeId = String(params.recipeId);
   await canChangeRecipe(request, recipeId);
 
-  let formData;
+  let formData
   if (request.headers.get("Content-Type")?.includes("multipart/form-data")) {
+    // composeUploadHandlers => takes array of handlers, if 1st handler returns null/undefined then it uses the next handler
     const uploadHandler = unstable_composeUploadHandlers(
       unstable_createFileUploadHandler({ directory: "public/images" }),
       unstable_createMemoryUploadHandler()
     );
     formData = await unstable_parseMultipartFormData(request, uploadHandler);
-    const image = formData.get("image") as File;
-    if (image.size !== 0) {
-      formData.set("imageUrl", `/images/${image.name}`);
+
+    const image = formData.get("image") as File
+
+    if (image.size !== 0){
+      formData.set('imageUrl', `/images/${image.name}`)
     }
   } else {
     formData = await request.formData();
