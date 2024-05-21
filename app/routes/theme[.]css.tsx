@@ -1,5 +1,51 @@
-import { type LoaderFunctionArgs } from "@remix-run/node";
+export function loader() {
+	const data = `
+    :root {
+      --color-primary: #00743e;
+      --color-primary-light: #4c9d77;
+    }
+  `
+
+	return new Response(data, {
+		headers: { "Content-Type": "text/css" },
+	})
+}
+
+/* CSS Resource Route explanation */
+//:root pseudo class used to create variable, and then "key" is added as the name
+
+/* CSS Resource Route V1: primary only
+export function loader() {
+	const data = `
+    :root {
+      --color-primary: #00743e
+    }
+  `
+
+	return new Response(data, {
+		headers: { "Content-Type": "text/css" },
+	})
+} */
+
+/* CSS Resource Route V2: primary & primary-light served by theme[.]css => [] used to escape remix routing because without [.], it would instead be theme/css
+
+export function loader() {
+	const data = `
+    :root {
+      --color-primary: #00743e;
+      --color-primary-light: #4c9d77;
+    }
+  `
+
+	return new Response(data, {
+		headers: { "Content-Type": "text/css" },
+	})
+}
+ */
+
+/* import { type LoaderFunctionArgs } from "@remix-run/node";
 import { themeCookie } from "~/cookies";
+import {loader} from "./app/my-resource-route-example"
 
 function getTheme(color: string) {
   switch (color) {
@@ -59,3 +105,4 @@ export async function loader({ request }: LoaderFunctionArgs) {
     headers: { "content-type": "text/css" },
   });
 }
+ */
