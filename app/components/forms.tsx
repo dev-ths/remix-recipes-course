@@ -3,6 +3,7 @@ import type {
   ButtonHTMLAttributes,
   HTMLAttributes,
   InputHTMLAttributes,
+  ReactNode,
 } from "react";
 import React from "react";
 import { classNames } from "~/utils/misc";
@@ -133,19 +134,16 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-interface IconInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  icon: React.ReactNode;
+interface IconInputProps extends InputHTMLAttributes<HTMLInputElement>{
+icon:ReactNode
 }
-export function IconInput({ icon, ...props }: IconInputProps) {
+
+export function IconInput({icon,...props}:IconInputProps){
   return (
-    <div
-      className={classNames(
-        "flex items-stretch border-2 border-gray-300 rounded-md",
-        "focus-within:border-primary"
-      )}
-    >
-      <div className="px-2 flex flex-col justify-center">{icon}</div>
-      <input className="w-full py-3 px-2 outline-none rounded-md" {...props} />
-    </div>
-  );
+  <div className={classNames("flex items-stretch border-2 border-gray-300 rounded-md",
+    "focus-within:border-primary"
+  )}>
+    <div className="px-2 flex flex-col justify-center">{icon}</div>
+    <input className="w-full py-3 px-2 outline-none rounded-md" {...props}/>
+  </div>)
 }

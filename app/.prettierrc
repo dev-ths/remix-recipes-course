@@ -1,0 +1,15 @@
+{
+	"arrowParens": "always",
+	"bracketSameLine": false,
+	"bracketSpacing": true,
+	"embeddedLanguageFormatting": "auto",
+	"jsxSingleQuote": false,
+	"plugins": ["prettier-plugin-tailwindcss"],
+	"quoteProps": "as-needed",
+	"semi": false,
+	"singleAttributePerLine": true,
+	"singleQuote": false,
+	"tabWidth": 2,
+	"trailingComma": "es5",
+	"useTabs": true
+}
