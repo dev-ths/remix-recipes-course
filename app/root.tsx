@@ -186,3 +186,50 @@ export function ErrorBoundary() {
 		</div>
 	)
 }
+
+/* APP PAGE V1: pre-cache discover page
+export default function App() {
+	const data = useLoaderData<typeof loader>()
+
+	return (
+		<>
+			<nav
+				className={classNames(
+					"bg-primary text-white md:w-16",
+					"flex justify-between md:flex-col"
+				)}
+			>
+				<ul className="flex md:flex-col">
+					<AppNavLink to="/">
+						<HomeIcon />
+					</AppNavLink>
+					<AppNavLink to="discover">
+						<DiscoverIcon />
+					</AppNavLink>
+					{data.isLoggedIn ? (
+						<AppNavLink to="app">
+							<RecipeBookIcon />
+						</AppNavLink>
+					) : null}
+					<AppNavLink to="settings">
+						<SettingsIcon />
+					</AppNavLink>
+				</ul>
+				<ul>
+					{data.isLoggedIn ? (
+						<AppNavLink to="/logout">
+							<LogoutIcon />
+						</AppNavLink>
+					) : (
+						<AppNavLink to="/login">
+							<LoginIcon />
+						</AppNavLink>
+					)}
+				</ul>
+			</nav>
+			<div className="w-full p-4 md:w-[calc(100%-4rem)]">
+				<Outlet />
+			</div>
+		</>
+	)
+} */
