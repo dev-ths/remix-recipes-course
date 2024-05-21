@@ -93,8 +93,8 @@ const ingredientAmount = z.string().nullable()
 const ingredientName = z.string().min(1, "Name cannot be blank")
 
 const saveIngredientAmountSchema = z.object({
-	amount: ingredientAmount,
 	id: ingredientId,
+	amount: ingredientAmount,
 })
 
 const saveIngredientNameSchema = z.object({
@@ -344,7 +344,10 @@ export default function RecipeDetail() {
 					<Link
 						replace
 						to="update-meal-plan"
-						className="flex flex-col justify-center"
+						className={classNames(
+							"flex flex-col justify-center",
+							data.recipe?.mealPlanMultiplier !== null ? "text-primary" : ""
+						)}
 					>
 						<CalendarIcon />
 					</Link>
