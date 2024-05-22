@@ -1,6 +1,39 @@
-import { useLoaderData } from "@remix-run/react";
+import { json, useLoaderData } from "@remix-run/react"
+import { DiscoverGrid, DiscoverListItem } from "~/components/discover"
+import db from "~/db.server"
+
+export async function loader() {
+	const recipes = await db.recipe.findMany({
+		take: 25,
+		orderBy: { updatedAt: "desc" },
+		include: { user: { select: { firstName: true, lastName: true } } },
+	})
+
+	return json({ recipes })
+}
+
+export default function Discover() {
+	const data = useLoaderData<typeof loader>()
+
+	return (
+		<div className="m-[-1rem] h-[calc(100vh-1rem)] overflow-auto p-4">
+			<h1 className="mb-4 text-2xl font-bold">Discover</h1>
+			<DiscoverGrid>
+				{data.recipes.map((recipe) => (
+					<DiscoverListItem
+						key={recipe.id}
+						recipe={recipe}
+					/>
+				))}
+			</DiscoverGrid>
+		</div>
+	)
+}
+
+/* import { useLoaderData } from "@remix-run/react";
 import { DiscoverGrid, DiscoverListItem } from "~/components/discover";
 import db from "~/db.server";
+import {RecipeDetailWrapper} from "../components/recipes"
 
 export async function loader() {
   const recipes = await db.recipe.findMany({
@@ -25,3 +58,4 @@ export default function Discover() {
     </div>
   );
 }
+ */
